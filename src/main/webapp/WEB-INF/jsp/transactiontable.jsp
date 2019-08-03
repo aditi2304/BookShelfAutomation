@@ -2,7 +2,8 @@
     pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-<%@page import="com.javainuse.model.Book"%>
+<%@page import="java.util.Date"%>
+<%@page import="com.javainuse.model.Transaction"%>
 <!doctype html>
 <html lang="en">
  
@@ -80,14 +81,14 @@
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="page-header">
-                            <h2 class="pageheader-title">Book Table</h2>
+                            <h2 class="pageheader-title">Transaction Table</h2>
                             
                             <div class="page-breadcrumb">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
                                         <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Table</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Books</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Transaction</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -103,30 +104,29 @@
                     <!-- ============================================================== -->
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
-                            <h5 class="card-header">Book Table</h5>
+                            <h5 class="card-header">Transaction Table</h5>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered first">
                                         <thead>
                                             <tr>
-                                            	<th>Book Id</th>
-                                            <th>Book Name</th>
-                                            <th>Book Author</th>
-                                            <th>Book Edition</th>
-                                             <th>Remove Book</th>
-                                              <th>Edit Book</th>
+                                            	<th>EmpId</th>
+                                            <th>BookNo</th>
+                                            <th>Date of Issue</th>
+                                            <th>Date of Return</th>
+                                           
                                             </tr>
                                         </thead>
                                         <tbody>
                                         <% 
                                             
-                                            ArrayList<Book> booklist = (ArrayList<Book>)request.getAttribute("book_list");
-                                        for(Book book : booklist)
+                                            ArrayList<Transaction> tlist = (ArrayList<Transaction>)request.getAttribute("transaction_list");
+                                        for(Transaction t : tlist)
                                         {
-                                        	String bookid=book.getBookNo();
-                                        	String bookname=book.getBookName();
-                                        	String bookauthor=book.getBookAuthor();
-                                        	String bookedition=book.getBookEdition();
+                                        	String empid=t.getEmpId();
+                                        	String bookNo=t.getBookNo();
+                                        	Date doissue=t.getDOIssue();
+                                        	Date doreturn=t.getDOReturn();
                                         	
                                       
                                            // out.print("<div class='col-lg-3 col-md-6'><div class='item'><img src='" +address+ "' alt='img'></img><h3>");
@@ -137,26 +137,19 @@
                                         out.print("<tr>");  
                                             	
                                                  out.print("<td>");  
-                                                out.print(bookid) ;
+                                                out.print(empid) ;
                                                  out.print("</td>");  
                                                  out.print("<td>");  
-                                                 out.print(bookname) ;
+                                                 out.print(bookNo) ;
                                                   out.print("</td>"); 
                                                   out.print("<td>");  
-                                                  out.print(bookauthor) ;
+                                                  out.print(doissue) ;
                                                    out.print("</td>"); 
                                                    out.print("<td>");  
-                                                   out.print(bookedition) ;
+                                                   out.print(doreturn) ;
                                                     out.print("</td>"); 
                                                     
-                                                    out.print("<td><a href='/deleteBook?id=" + bookid + "'>");  
-                                                    out.print("Remove") ;
-                                                     out.print("</a></td>"); 
-                                                      
-                                                     out.print("<td><a href='menu'>") ;
-                                                     out.print("Edit"); 
-                                                      out.print("</a></td>"); 
-                                                
+                                                   
                                                     out.print("<tr>");  
                                                     }
                                             %>

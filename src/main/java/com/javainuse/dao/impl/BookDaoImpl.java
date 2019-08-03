@@ -51,15 +51,10 @@ public class BookDaoImpl extends JdbcDaoSupport implements BookDao {
 		List<Book> result = new ArrayList<Book>();
 		for(Map<String, Object> row:rows){
 			Book book = new Book();
-			//book.boookNo = "dd";
 			book.setBookNo((String)row.get("bookNo"));
-			//System.out.println((String)row.get("bookNo"));
 			book.setBookName((String)row.get("bookName"));
-			//System.out.println((String)row.get("bookName"));
 			book.setBookAuthor((String)row.get("author"));
-			//System.out.println((String)row.get("author"));
 			book.setBookEdition((String)row.get("edition"));
-			//System.out.println((String)row.get("edition"));
 			result.add(book);
 		}
 		

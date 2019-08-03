@@ -53,10 +53,10 @@
                                 <a class="nav-link" href="/booktable">Books</a>
                             </li>
 							<li class="nav-item">
-                                <a class="nav-link" href="bookissueinfotable.jsp">BookIssueInfo</a>
+                                <a class="nav-link" href="/bookissueinfotable">BookIssueInfo</a>
                             </li>
 							<li class="nav-item">
-                                <a class="nav-link" href="transactionstable.jsp">Transactions</a>
+                                <a class="nav-link" href="/transactiontable">Transactions</a>
                             </li>
 							<li class="nav-item">
                                 <a class="nav-link" href="alerttable.jsp">Alert</a>

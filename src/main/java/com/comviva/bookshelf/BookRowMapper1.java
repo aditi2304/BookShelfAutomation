@@ -1,4 +1,6 @@
 package com.comviva.bookshelf;
+import com.javainuse.model.BookIssueInfo;
+import com.javainuse.model.Transaction;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -221,22 +223,22 @@ public class BookRowMapper1 {
 		  return 0;
 	}
 
-	public List<Transaction> getTransactions(String empId) {
+	public List<Transaction> getTransactions() {
 		List<Transaction> transactions = null;
 		 Transaction transaction=null;
-		 System.out.println(empId);
+	
 		  try{
 			//loading drivers for Postgres
 			Class.forName("org.postgresql.Driver");
 
 			//creating connection with the database 
 			Connection con=DriverManager.getConnection
-	                   ("jdbc:postgresql://localhost:5432/postgres","postgres","root");
+	                   ("jdbc:postgresql://localhost:5432/postgres","postgres","admin");
 
 			Statement stmt = con.createStatement();
 			String sql;
 			
-			sql="select * from Transaction where empId='"+empId+"'";
+			sql="select * from transaction";
 	   
 			ResultSet rs = stmt.executeQuery(sql);
 			transactions=new ArrayList<>();
@@ -246,8 +248,8 @@ public class BookRowMapper1 {
 	    	
 	    	transaction.setEmpId(rs.getString("empId"));
 	    	transaction.setBookNo(rs.getString("bookno"));
-	    	transaction.setDOIssue(rs.getString("doissue"));
-	    	transaction.setDOReturn(rs.getString("doreturn"));
+	    	transaction.setDOIssue(rs.getDate("doissue"));
+	    	transaction.setDOReturn(rs.getDate("doreturn"));
 	    	System.out.println(transaction);
 	 		transactions.add(transaction);
 	       }
@@ -257,6 +259,42 @@ public class BookRowMapper1 {
 			e.printStackTrace();
 		  }
 		 return transactions;
+	}
+	
+	public List<BookIssueInfo> getBookIssueInfo() {
+		List<BookIssueInfo> bookissueinfos = null;
+		 BookIssueInfo bookissueinfo=null;
+	
+		  try{
+			//loading drivers for Postgres
+			Class.forName("org.postgresql.Driver");
+
+			//creating connection with the database 
+			Connection con=DriverManager.getConnection
+	                   ("jdbc:postgresql://localhost:5432/postgres","postgres","admin");
+
+			Statement stmt = con.createStatement();
+			String sql;
+			
+			sql="select * from bookissueinfo";
+	   
+			ResultSet rs = stmt.executeQuery(sql);
+			bookissueinfos=new ArrayList<>();
+			while(rs.next()){
+	    	 
+				bookissueinfo=new BookIssueInfo();
+	    	
+				bookissueinfo.setBookNo(rs.getString("bookNo"));
+				bookissueinfo.setIssued(rs.getBoolean("issued"));
+	    	
+				bookissueinfos.add(bookissueinfo);
+	       }
+	    }
+		catch(Exception e)
+		  {
+			e.printStackTrace();
+		  }
+		 return bookissueinfos;
 	}
 	
 

@@ -17,12 +17,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.comviva.bookshelf.BookRowMapper1;
 import com.comviva.bookshelf.Books;
-import com.comviva.bookshelf.Transaction;
 import com.javainuse.model.Admin;
 import com.javainuse.model.Book;
 import com.javainuse.model.Employee;
 import com.javainuse.service.BookService;
 import com.javainuse.service.EmployeeService;
+import com.javainuse.model.*;
 
 @Controller
 
@@ -68,10 +68,6 @@ public class EmployeeController {
 	
 		ModelAndView mv = new ModelAndView("employeetable");
 		List<Employee> employee = employeeService.getAllEmployees();
-		System.out.println("employee list " +employee);
-		for(Employee e: employee) {
-			System.out.println("employee: " +e.getEmpEmail());
-		}
 		mv.addObject("employee_list", employee);
 		return mv;
 	}
@@ -85,6 +81,29 @@ public class EmployeeController {
 		return mv;
 	}
 	
+	@RequestMapping("/transactiontable")
+	public ModelAndView shoetransactions_admin() {
+		
+		BookRowMapper1 book_mapper = new BookRowMapper1();
+		List<Transaction> trans = book_mapper.getTransactions();
+		
+		ModelAndView mv = new ModelAndView("transactiontable");
+		mv.addObject("transaction_list", trans);
+
+		return mv;
+	}
+	
+	@RequestMapping("/bookissueinfotable")
+	public ModelAndView shoebookissueinfo_admin() {
+		
+		BookRowMapper1 book_mapper = new BookRowMapper1();
+		List<BookIssueInfo> book_issue = book_mapper.getBookIssueInfo();
+		
+		ModelAndView mv = new ModelAndView("bookissueinfo");
+		mv.addObject("bookissueinfo_list", book_issue);
+
+		return mv;
+	}
 	@RequestMapping(value = "/addNewBook", method = RequestMethod.GET)
 	public ModelAndView showbooks() {
 	
@@ -106,12 +125,13 @@ public class EmployeeController {
 	@RequestMapping(value = "/deleteBook", method = RequestMethod.GET)
 	public ModelAndView deleteBook(@ModelAttribute("book") Book book, @RequestParam(name = "id") String id) {
 		
+		System.out.println(id);
 		bookService.deleteBook(id);
 		
 		List<Book> books = bookService.getAllBooks();
 		
-		ModelAndView model = new ModelAndView("getEmployees");
-		model.addObject("books", books);
+		ModelAndView model = new ModelAndView("booktable");
+		model.addObject("book_list", books);
 		return model;
 	}
 	
@@ -211,7 +231,7 @@ public class EmployeeController {
 		
 	}
 	
-	@RequestMapping(value="/history",method = RequestMethod.GET)
+	/*@RequestMapping(value="/history",method = RequestMethod.GET)
 	public ModelAndView book_search_history(@RequestParam String EmpId) {
 		System.out.println(EmpId);
 		BookRowMapper1 user1=new BookRowMapper1();
@@ -229,7 +249,7 @@ public class EmployeeController {
 				return mv;
 		      }
 		
-	}
+	}*/
 	
 	@RequestMapping(value="/successfulreturn",method = RequestMethod.GET)
 	public ModelAndView book_return(@RequestParam String EmpId,@RequestParam String BookNo) {
