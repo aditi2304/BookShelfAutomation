@@ -3,8 +3,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="com.javainuse.model.Book"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-
 <!doctype html>
 <html lang="en">
  
@@ -107,28 +105,21 @@
                         <div class="card">
                             <h5 class="card-header">Book Table</h5> <a href="/addNewBook"> Add New Book</a>
                             <div class="card-body">
-                            	<div id="addNewBook">
-									<form:form action="/addNewBook" method="post"
-										modelAttribute="book">
-										<p>
-											<label>Enter Book no</label>
-											<form:input  path="bookNo" />
-										</p>
-										<p>
-											<label>Enter Book name</label>
-											<form:input  path="bookName" />
-										</p>
-										<p>
-											<label>Enter Book author</label>
-											<form:input  path="bookAuthor" />
-										</p>
-										<p>
-											<label>Enter Book Edition</label>
-											<form:input  path="bookEdition" />
-										</p>
-										<input type="SUBMIT" value="Submit" />
-									</form:form>
-								</div>
+                               <form action="/updateBook">
+                               		<label>Book No</label>
+                               		<input type="text" name="bookNo" value= ${book_id} readonly/>
+                               		
+                               		<label>Enter Book Name</label>
+                               		<input type="text" name="bookName" >
+                               		
+                               		<label>Enter Book Author</label>
+                               		<input type="text" name="author" >
+                               		
+                               		<label>Enter Book Edition</label>
+                               		<input type="text" name="edition" >
+                               		
+                               		<button type="submit">Update</button>
+                               </form>
                             </div>
                         </div>
                     </div>

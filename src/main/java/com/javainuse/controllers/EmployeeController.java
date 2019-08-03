@@ -53,7 +53,7 @@ public class EmployeeController {
 			return mv;
 		}
 		else {
-			//request.getSession().setAttribute("session_id", result.getEmpId());
+			request.getSession().setAttribute("adminsession_id", result.getAdminId());
 			//System.out.println("session" + request.getSession().getAttribute("session_id"));
 			//mv2.addObject("eid", result.getEmpId());
 			//mv2.addObject("ename", result.getEmpName());
@@ -64,26 +64,44 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping("/employeetable")
-	public ModelAndView showemployee() {
-	
-		ModelAndView mv = new ModelAndView("employeetable");
-		List<Employee> employee = employeeService.getAllEmployees();
-		mv.addObject("employee_list", employee);
-		return mv;
+	public ModelAndView showemployee(HttpServletRequest request) {
+		Object s = request.getSession().getAttribute("adminsession_id");
+		System.out.println(s);
+		if(s == null){
+			return new ModelAndView("adminlogin", "adm", new Admin());
+		}
+		else {
+			ModelAndView mv = new ModelAndView("employeetable");
+			List<Employee> employee = employeeService.getAllEmployees();
+			mv.addObject("employee_list", employee);
+			return mv;
+		}
+		
 	}
 	
 	@RequestMapping("/booktable")
-	public ModelAndView showbooks_admin() {
-		
+	public ModelAndView showbooks_admin(HttpServletRequest request) {
+		Object s = request.getSession().getAttribute("adminsession_id");
+		System.out.println(s);
+		if(s == null){
+			return new ModelAndView("adminlogin", "adm", new Admin());
+		}
+		else {
 		ModelAndView mv = new ModelAndView("booktable");
 		List<Book> book = bookService.getAllBooks();
 		mv.addObject("book_list", book);
 		return mv;
+		}
 	}
 	
 	@RequestMapping("/transactiontable")
-	public ModelAndView shoetransactions_admin() {
-		
+	public ModelAndView shoetransactions_admin(HttpServletRequest request) {
+		Object s = request.getSession().getAttribute("adminsession_id");
+		System.out.println(s);
+		if(s == null){
+			return new ModelAndView("adminlogin", "adm", new Admin());
+		}
+		else {
 		BookRowMapper1 book_mapper = new BookRowMapper1();
 		List<Transaction> trans = book_mapper.getTransactions();
 		
@@ -91,24 +109,39 @@ public class EmployeeController {
 		mv.addObject("transaction_list", trans);
 
 		return mv;
+		}
 	}
 	
 	@RequestMapping("/bookissueinfotable")
-	public ModelAndView shoebookissueinfo_admin() {
+	public ModelAndView shoebookissueinfo_admin(HttpServletRequest request) {
+		Object s = request.getSession().getAttribute("adminsession_id");
+		System.out.println(s);
+		if(s == null){
+			return new ModelAndView("adminlogin", "adm", new Admin());
+		}
+		else {
+			BookRowMapper1 book_mapper = new BookRowMapper1();
+			List<BookIssueInfo> book_issue = book_mapper.getBookIssueInfo();
+			
+			ModelAndView mv = new ModelAndView("bookissueinfo");
+			mv.addObject("bookissueinfo_list", book_issue);
+	
+			return mv;
+		}
+	}
+	
+	@RequestMapping("/adminlogout")
+	public ModelAndView admin_logout(HttpServletRequest request) {
+		request.getSession().setAttribute("adminsession_id", null);
 		
-		BookRowMapper1 book_mapper = new BookRowMapper1();
-		List<BookIssueInfo> book_issue = book_mapper.getBookIssueInfo();
+		return new ModelAndView("adminlogin", "adm", new Admin());
 		
-		ModelAndView mv = new ModelAndView("bookissueinfo");
-		mv.addObject("bookissueinfo_list", book_issue);
-
-		return mv;
 	}
 	@RequestMapping(value = "/addNewBook", method = RequestMethod.GET)
 	public ModelAndView showbooks() {
 	
 		
-		return new ModelAndView("addbookform", "book", new Book());
+		return new ModelAndView("welcome", "book", new Book());
 		
 	}
 	@RequestMapping(value = "/addNewBook", method = RequestMethod.POST)
@@ -136,9 +169,11 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(value = "/bookedit")
-	public ModelAndView editbook(@ModelAttribute("book") Book book) {
-		
-		return new ModelAndView("editform");
+	public ModelAndView editbook(@ModelAttribute("book") Book book, @RequestParam(name = "id") String id) {
+		//List<Book> books = bookService.getAllBooks();
+		ModelAndView model = new ModelAndView("editform");
+		model.addObject("book_id", id);
+		return model;
 	}
 
 	@RequestMapping(value = "/updateBook", method = RequestMethod.GET)

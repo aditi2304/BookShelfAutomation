@@ -33,6 +33,7 @@
          <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
                 <a class="navbar-brand" href="#">BOOKSHELF ADMIN</a>
+                <a class="navbar" href="/adminlogout">LOGOUT</a>
             </nav>
         </div>
         <!-- ============================================================== -->
@@ -153,7 +154,7 @@
                                                     out.print("Remove") ;
                                                      out.print("</a></td>"); 
                                                       
-                                                     out.print("<td><a href='/bookedit'>") ;
+                                                     out.print("<td><a href='/bookedit?id=" + bookid + "'>") ;
                                                      out.print("Edit"); 
                                                       out.print("</a></td>"); 
                                                 
