@@ -194,11 +194,6 @@ public class EmployeeController {
 		return new ModelAndView("login", "emp", new Employee());
 	}
 
-	@RequestMapping("/welcome")
-	public ModelAndView firstPage() {
-		return new ModelAndView("welcome");
-	}
-	
 	@RequestMapping(value = "/addNewEmployee", method = RequestMethod.GET)
 	public ModelAndView show() {
 		return new ModelAndView("addEmployee", "emp", new Employee());
@@ -303,7 +298,6 @@ public class EmployeeController {
 		   
 				return mv;
 		      }
-		
 	}
 	
 	
