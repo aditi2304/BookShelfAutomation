@@ -72,17 +72,17 @@
             <h1>Admin / Login</h1>
 						<br/>
 						<br/>	
-             <div id="addEmployee" >
-					<form:form action="/login_user" method="post"
-						modelAttribute="emp">
-						<p style="color: red">${message}</p>
+             <div id="adminlogin" >
+					<form:form action="/login_admin" method="post"
+						modelAttribute="adm">
+						<p style="color: red">${messageadmin}</p>
 						<p>
 							<label>Enter Admin Id</label>
-							<form:input  path="EmpId" />
+							<form:input  path="adminId" />
 						</p>
 						<p>
 							<label>Enter Password</label>
-							<form:input  path="Password" />
+							<form:input  path="adminPassword" />
 						</p>
 						<input type="SUBMIT" value="Submit" />
 					</form:form>

@@ -4,6 +4,7 @@ public class Admin {
 
 	private String adminId;
 	private String adminPassword;
+	
 	public String getAdminId() {
 		return adminId;
 	}
@@ -16,7 +17,5 @@ public class Admin {
 	public void setAdminPassword(String adminPassword) {
 		this.adminPassword = adminPassword;
 	}
-	
-	
 
 }

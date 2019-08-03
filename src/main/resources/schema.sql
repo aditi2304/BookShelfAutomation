@@ -1,4 +1,8 @@
-
+create table admin (
+	adminId VARCHAR(10) NOT NULL,
+	adminPassword VARCHAR(100) NOT NULL,
+	PRIMARY KEY (adminId)
+);
 
 CREATE TABLE employee (
   EmpId VARCHAR(10) NOT NULL,

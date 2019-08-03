@@ -46,7 +46,7 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="employeetable.jsp">Employee</a>
+                                <a class="nav-link" href="/employeetable">Employee</a>
                             </li>
 							<li class="nav-item">
                                 <a class="nav-link" href="booktable.jsp">Books</a>

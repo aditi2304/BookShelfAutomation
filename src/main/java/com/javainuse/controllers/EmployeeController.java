@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.comviva.bookshelf.BookRowMapper1;
 import com.comviva.bookshelf.Books;
 import com.comviva.bookshelf.Transaction;
+import com.javainuse.model.Admin;
 import com.javainuse.model.Book;
 import com.javainuse.model.Employee;
 import com.javainuse.service.BookService;
@@ -35,7 +36,31 @@ public class EmployeeController {
 	
 	@RequestMapping("/adminlogin")
 	public ModelAndView showadmin() {
-		return new ModelAndView("adminlogin", "emp", new Employee());
+		return new ModelAndView("adminlogin", "adm", new Admin());
+	}
+	
+	@RequestMapping("/login_admin")
+	public ModelAndView login_admin(@ModelAttribute("adm") Admin adm, HttpServletRequest request) {
+		System.out.println(adm.getAdminId() + " " + adm.getAdminPassword());
+		ModelAndView mv=new ModelAndView("adminlogin");
+		ModelAndView mv2=new ModelAndView("admin");
+		String adminid = adm.getAdminId();
+		String adminpassword = adm.getAdminPassword();
+		Admin result = mymap.AdminAvailable(adminid, adminpassword);
+		
+		if(result == null) {
+			mv.addObject("messageadmin", "Incorrect details");
+			return mv;
+		}
+		else {
+			//request.getSession().setAttribute("session_id", result.getEmpId());
+			//System.out.println("session" + request.getSession().getAttribute("session_id"));
+			//mv2.addObject("eid", result.getEmpId());
+			//mv2.addObject("ename", result.getEmpName());
+			//mv2.addObject("eemail", result.getEmpEmail());
+			
+			return mv2; 
+		}
 	}
 	
 	@RequestMapping(value = "/addNewBook", method = RequestMethod.GET)
