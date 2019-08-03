@@ -4,6 +4,13 @@ create table admin (
 	PRIMARY KEY (adminId)
 );
 
+create table books (
+	bookNo varchar(40) NOT NULL,
+	bookName varchar(40) NOT NULL,
+	author varchar(40) NOT NULL,
+	edition varchar(40) NOT NULL,
+	PRIMARY KEY (bookNo)
+);
 CREATE TABLE Transaction
 (
  EmpId varchar(15) NOT NULL,
