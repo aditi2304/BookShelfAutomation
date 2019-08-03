@@ -63,6 +63,28 @@ public class EmployeeController {
 		}
 	}
 	
+	@RequestMapping("/employeetable")
+	public ModelAndView showemployee() {
+	
+		ModelAndView mv = new ModelAndView("employeetable");
+		List<Employee> employee = employeeService.getAllEmployees();
+		System.out.println("employee list " +employee);
+		for(Employee e: employee) {
+			System.out.println("employee: " +e.getEmpEmail());
+		}
+		mv.addObject("employee_list", employee);
+		return mv;
+	}
+	
+	@RequestMapping("/booktable")
+	public ModelAndView showbooks_admin() {
+		
+		ModelAndView mv = new ModelAndView("booktable");
+		List<Book> book = bookService.getAllBooks();
+		mv.addObject("book_list", book);
+		return mv;
+	}
+	
 	@RequestMapping(value = "/addNewBook", method = RequestMethod.GET)
 	public ModelAndView showbooks() {
 	

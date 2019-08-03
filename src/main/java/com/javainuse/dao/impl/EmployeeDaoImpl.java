@@ -65,6 +65,8 @@ public class EmployeeDaoImpl extends JdbcDaoSupport implements EmployeeDao{
 			Employee emp = new Employee();
 			emp.setEmpId((String)row.get("EmpId"));
 			emp.setPassword((String)row.get("Password"));
+			emp.setEmpName((String)row.get("EmpName"));
+			emp.setEmpEmail((String)row.get("EmpEmail"));
 			result.add(emp);
 		}
 		
