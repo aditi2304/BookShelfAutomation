@@ -23,7 +23,7 @@
                 <div class="row">
                     <div class="col-md-3"><a href="#" class="web-url">www.comviva.com</a></div>
                     <div class="col-md-6">
-                        <h5>Admin Panel</h5></div>
+                        <h5>Enhance your learning daily</h5></div>
                     <div class="col-md-3">
                         <span class="ph-number">Call : 800 1234 5678</span>
                     </div>
@@ -72,7 +72,7 @@
             <h1>Admin / Login</h1>
 						<br/>
 						<br/>	
-             <div id="adminlogin" >
+              <div id="adminlogin" >
 					<form:form action="/login_admin" method="post"
 						modelAttribute="adm">
 						<p style="color: red">${messageadmin}</p>

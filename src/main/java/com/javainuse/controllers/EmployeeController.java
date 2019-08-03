@@ -108,7 +108,7 @@ public class EmployeeController {
 	public ModelAndView showbooks() {
 	
 		
-		return new ModelAndView("addEmployee", "book", new Book());
+		return new ModelAndView("addbookform", "book", new Book());
 		
 	}
 	@RequestMapping(value = "/addNewBook", method = RequestMethod.POST)
@@ -118,8 +118,8 @@ public class EmployeeController {
 		
 		List<Book> books = bookService.getAllBooks();
 	
-		ModelAndView model = new ModelAndView("getEmployees");
-		model.addObject("books", books);
+		ModelAndView model = new ModelAndView("booktable");
+		model.addObject("book_list", books);
 		return model;
 	}
 	@RequestMapping(value = "/deleteBook", method = RequestMethod.GET)
@@ -135,7 +135,13 @@ public class EmployeeController {
 		return model;
 	}
 	
-	@RequestMapping(value = "/updatebook", method = RequestMethod.GET)
+	@RequestMapping(value = "/bookedit")
+	public ModelAndView editbook(@ModelAttribute("book") Book book) {
+		
+		return new ModelAndView("editform");
+	}
+
+	@RequestMapping(value = "/updateBook", method = RequestMethod.GET)
 	public ModelAndView updateBook(@ModelAttribute("book") Book book, @RequestParam(name = "bookNo") String bookNo,
 			@RequestParam(name = "bookName") String bookName, @RequestParam(name = "author") String author,
 			@RequestParam(name = "edition") String edition) {
@@ -143,8 +149,8 @@ public class EmployeeController {
 		bookService.updateBook(bookNo, bookName, author, edition);
 		
 		List<Book> books = bookService.getAllBooks();
-		ModelAndView model = new ModelAndView("getEmployees");
-		model.addObject("books", books);
+		ModelAndView model = new ModelAndView("booktable");
+		model.addObject("book_list", books);
 		return model;
 	}
 	
