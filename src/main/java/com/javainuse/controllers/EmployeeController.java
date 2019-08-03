@@ -193,7 +193,12 @@ public class EmployeeController {
 	public ModelAndView loginpage() {
 		return new ModelAndView("login", "emp", new Employee());
 	}
-
+	
+	@RequestMapping("/userlogout")
+	public ModelAndView logout_user(HttpServletRequest request) {
+		request.getSession().setAttribute("session_id", null);
+		return new ModelAndView("login", "emp", new Employee());
+	}
 	@RequestMapping(value = "/addNewEmployee", method = RequestMethod.GET)
 	public ModelAndView show() {
 		return new ModelAndView("addEmployee", "emp", new Employee());

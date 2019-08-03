@@ -58,6 +58,7 @@
     <div class="breadcrumb">
         <div class="container">
             <a class="breadcrumb-item" href="index.html">Home</a>
+            <a class="breadcrumb-item" href="/userlogout">Log Out</a>
             <span class="breadcrumb-item active">Search</span>
         </div>
     </div>
