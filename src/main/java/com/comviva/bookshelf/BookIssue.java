@@ -3,6 +3,15 @@ package com.comviva.bookshelf;
 public class BookIssue{
 	Books book;
 	boolean issued;
+	
+	BookIssue(){
+	}
+	
+	BookIssue(Book book, boolean issued){
+		this.book=book;
+		this.issued=issued;
+	}
+	
 	public Books getBook() {
 		return book;
 	}
